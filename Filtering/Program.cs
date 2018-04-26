@@ -6,7 +6,18 @@ namespace Filtering
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var polFilter = new PolicyFilter(new PolicyDal())
+            {
+                NameContains = "ab",
+                OrderBy = "Name", // we will ordering based on the property Name of all PolicyFound
+                Take = 50
+            };
+
+            foreach (var row in polFilter.ApplyFilter())
+            {
+                Console.WriteLine(row.Name);
+            }
+            Console.ReadLine();
         }
     }
 }
